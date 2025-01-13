@@ -1,8 +1,10 @@
 import qr_code from "@/app/qr-code";
 
 export default function Home() {
-  // Assuming `qr_code` exports a method or object with the `numberArray`
-  const numberArray: number[][] = qr_code(); // Adjust based on how qr_code is implemented
+  const numberArray: number[][] = qr_code();
+
+  const squareSize = 10;
+  const gridWidth = squareSize * numberArray[0].length;
 
   return (
     <section className="py-24">
@@ -11,18 +13,19 @@ export default function Home() {
         <div
           style={{
             display: "grid",
-            gap: "4px",
-            gridTemplateColumns: `repeat(${numberArray[0].length}, 1fr)`,
+            gap: "0px",
+            gridTemplateColumns: `repeat(${numberArray[0].length}, ${squareSize}px)`,
+            width: `${gridWidth}px`,
+            margin: "0 auto",
           }}
         >
           {numberArray.flat().map((value, index) => (
             <div
               key={index}
               style={{
-                width: "20px",
-                height: "20px",
+                width: `${squareSize}px`,
+                height: `${squareSize}px`,
                 backgroundColor: value === 1 ? "black" : "white",
-                border: "1px solid gray", // Optional for visibility
               }}
             />
           ))}
