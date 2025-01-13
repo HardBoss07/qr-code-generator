@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Frontend Template",
-  description: "Frontend Template",
+  title: "QR Code Generator",
+  description: "QR Code Generator",
 };
 
 export default function RootLayout({
