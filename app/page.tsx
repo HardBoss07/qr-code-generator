@@ -10,6 +10,10 @@ export default function Home() {
     <section className="py-24">
       <div className="container">
         <h1 className="text-3xl font-bold mb-8">QR Code Generator</h1>
+        <input style={{
+          width: `${squareSize * numberArray[0].length}px`,
+          height: `${squareSize * 2}px`,
+        }}>Enter your Data:</input>
         <div
           style={{
             display: "grid",
