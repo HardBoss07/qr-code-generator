@@ -1,6 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import qr_code from "@/app/qr-code";
 
 export default function Home() {
+  const [inputText, setInputText] = useState(""); // State to store user input
   const numberArray: number[][] = qr_code();
 
   const squareSize = 10;
@@ -10,10 +14,19 @@ export default function Home() {
     <section className="py-24">
       <div className="container">
         <h1 className="text-3xl font-bold mb-8">QR Code Generator</h1>
-        <input style={{
-          width: `${squareSize * numberArray[0].length}px`,
-          height: `${squareSize * 2}px`,
-        }}>Enter your Data:</input>
+
+        {/* Input Field */}
+        <div className="mb-6">
+          <input
+            type="text"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)} // Update state on input change
+            placeholder="Enter text for QR Code"
+            className="border p-2 rounded w-full max-w-md"
+          />
+        </div>
+
+        {/* QR Code Grid */}
         <div
           style={{
             display: "grid",
