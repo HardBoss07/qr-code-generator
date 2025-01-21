@@ -6,6 +6,7 @@ import qr_code from "@/app/qr-code";
 export default function Home() {
   const [inputText, setInputText] = useState(""); // State to store user input
   const numberArray: number[][] = qr_code();
+  const colorMapping = ["white", "black", "green", "red"];
 
   const squareSize = 10;
   const gridWidth = squareSize * numberArray[0].length;
@@ -42,7 +43,7 @@ export default function Home() {
               style={{
                 width: `${squareSize}px`,
                 height: `${squareSize}px`,
-                backgroundColor: value === 1 ? "black" : "white",
+                backgroundColor: colorMapping[value],
               }}
             />
           ))}
