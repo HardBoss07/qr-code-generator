@@ -87,7 +87,7 @@ const ascii_Map = new Map([
   ["0", [0, 0, 1, 1, 0, 0, 0, 0]]
 ]);
 
-/*const convert(input: string) => ({string: input}) => {
+export function convert(input: string) {
   const result: number[][] = [];
   for (let i = 0; i < input.length; i++) {
     const asciiValue = ascii_Map.get(input[i]);
@@ -96,4 +96,4 @@ const ascii_Map = new Map([
     }
   }
   return result;
-}*/
+}
