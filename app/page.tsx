@@ -48,6 +48,11 @@ export default function Home() {
             />
           ))}
         </div>
+
+        {/* Binary field */}
+        <div>
+
+        </div>
       </div>
     </section>
   );
