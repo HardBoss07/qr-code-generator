@@ -7,7 +7,7 @@ import { convert } from '@/app/binary-converter';
 export default function Home() {
   const [inputText, setInputText] = useState(""); // State to store user input
   const numberArray: number[][] = qr_code();
-  const colorMapping = ["white", "black", "green", "red"];
+  const colorMapping = ["white", "black", "green", "red", "placeholder", "teal", "violet"];
 
   const binary: number[][] = convert(inputText);
 
