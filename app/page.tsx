@@ -1,18 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import qr_code from "@/app/qr-code";
 import { convert } from '@/app/binary-converter';
+import { colorBits } from '@/app/qr-code';
 
 export default function Home() {
-  const [inputText, setInputText] = useState(""); // State to store user input
+  const [inputText, setInputText] = useState("");
+  const [binary, setBinary] = useState<number[][]>([]);
+
   const numberArray: number[][] = qr_code();
   const colorMapping = ["white", "black", "green", "red", "placeholder", "teal", "violet"];
 
-  const binary: number[][] = convert(inputText);
-
   const squareSize = 10;
   const gridWidth = squareSize * numberArray[0].length;
+
+  useEffect(() => {
+    const updatedBinary = convert(inputText);
+    setBinary(updatedBinary);
+
+    if (updatedBinary.length > 0) {
+      colorBits(updatedBinary[updatedBinary.length - 1]);
+    }
+  }, [inputText]);
 
   return (
     <section className="py-24">
@@ -24,7 +34,7 @@ export default function Home() {
           <input
             type="text"
             value={inputText}
-            onChange={(e) => setInputText(e.target.value)} // Update state on input change
+            onChange={(e) => setInputText(e.target.value)}
             placeholder="Enter text for QR Code"
             className="border p-2 rounded w-full max-w-md"
           />

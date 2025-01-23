@@ -36,3 +36,17 @@ console.log(numberArray);
 export default function qr_code() {
   return numberArray;
 }
+
+
+
+export function colorBits(input: number[]) {
+  console.log("input array: ", input);
+  numberArray[numberArray.length - 1][numberArray.length - 1] = input[0];
+  numberArray[numberArray.length - 1][numberArray.length - 2] = input[1];
+  numberArray[numberArray.length - 2][numberArray.length - 1] = input[2];
+  numberArray[numberArray.length - 2][numberArray.length - 2] = input[3];
+  numberArray[numberArray.length - 3][numberArray.length - 1] = input[4];
+  numberArray[numberArray.length - 3][numberArray.length - 2] = input[5];
+  numberArray[numberArray.length - 4][numberArray.length - 1] = input[6];
+  numberArray[numberArray.length - 4][numberArray.length - 2] = input[7];
+}
