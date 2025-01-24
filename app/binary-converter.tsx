@@ -97,3 +97,19 @@ export function convert(input: string) {
   }
   return result;
 }
+
+export function intToByte(input: number): number[] {
+  const result: number[] = [];
+  let divisionResult: number = input;
+
+  while (divisionResult > 0) {
+    result.unshift(divisionResult % 2);
+    divisionResult = Math.floor(divisionResult / 2);
+  }
+
+  while (result.length < 8) {
+    result.unshift(0);
+  }
+
+  return result;
+}

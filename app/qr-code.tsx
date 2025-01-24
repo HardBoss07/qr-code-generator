@@ -3,6 +3,7 @@
 // 2 = Quiet Zone (White in final)
 // 3 = Format strip
 // 5, 6 = White and Black for Fixed bits
+import { intToByte } from '@/app/binary-converter';
 
 const numberArray: number[][] = [
   [6, 6, 6, 6, 6, 6, 6, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2, 6, 6, 6, 6, 6, 6, 6],
@@ -28,8 +29,8 @@ const numberArray: number[][] = [
   [6, 5, 6, 6, 6, 5, 6, 2, 3, 0, 0, 0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 0, 0, 0, 0],
   [6, 5, 6, 6, 6, 5, 6, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [6, 5, 6, 6, 6, 5, 6, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [6, 5, 5, 5, 5, 5, 6, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [6, 6, 6, 6, 6, 6, 6, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  [6, 5, 5, 5, 5, 5, 6, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5],
+  [6, 6, 6, 6, 6, 6, 6, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 5]
 ];
 
 console.log(numberArray);
@@ -37,7 +38,17 @@ export default function qr_code() {
   return numberArray;
 }
 
-
+export function setLengthOfData(input: number) {
+  const byte: number[] = intToByte(input);
+  numberArray[numberArray.length - 3][numberArray.length - 1] = byte[0];
+  numberArray[numberArray.length - 3][numberArray.length - 2] = byte[1];
+  numberArray[numberArray.length - 4][numberArray.length - 1] = byte[2];
+  numberArray[numberArray.length - 4][numberArray.length - 2] = byte[3];
+  numberArray[numberArray.length - 5][numberArray.length - 1] = byte[4];
+  numberArray[numberArray.length - 5][numberArray.length - 2] = byte[5];
+  numberArray[numberArray.length - 6][numberArray.length - 1] = byte[6];
+  numberArray[numberArray.length - 6][numberArray.length - 2] = byte[7];
+}
 
 export function colorBits(input: number[]) {
   console.log("input array: ", input);

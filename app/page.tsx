@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import qr_code from "@/app/qr-code";
 import { convert } from '@/app/binary-converter';
-import { colorBits } from '@/app/qr-code';
+// import { colorBits } from '@/app/qr-code';
+import { setLengthOfData } from '@/app/qr-code'
 
 export default function Home() {
   const [inputText, setInputText] = useState("");
@@ -18,10 +19,10 @@ export default function Home() {
   useEffect(() => {
     const updatedBinary = convert(inputText);
     setBinary(updatedBinary);
-
-    if (updatedBinary.length > 0) {
+    setLengthOfData(inputText.length);
+  /*  if (updatedBinary.length > 0) {
       colorBits(updatedBinary[updatedBinary.length - 1]);
-    }
+    }*/
   }, [inputText]);
 
   return (
