@@ -40,14 +40,14 @@ export default function qr_code() {
 
 export function setLengthOfData(input: number) {
   const byte: number[] = intToByte(input);
-  numberArray[numberArray.length - 3][numberArray.length - 1] = byte[0];
-  numberArray[numberArray.length - 3][numberArray.length - 2] = byte[1];
-  numberArray[numberArray.length - 4][numberArray.length - 1] = byte[2];
-  numberArray[numberArray.length - 4][numberArray.length - 2] = byte[3];
-  numberArray[numberArray.length - 5][numberArray.length - 1] = byte[4];
-  numberArray[numberArray.length - 5][numberArray.length - 2] = byte[5];
-  numberArray[numberArray.length - 6][numberArray.length - 1] = byte[6];
-  numberArray[numberArray.length - 6][numberArray.length - 2] = byte[7];
+  numberArray[numberArray.length - 3][numberArray.length - 1] = byte[0] + 5;
+  numberArray[numberArray.length - 3][numberArray.length - 2] = byte[1] + 5;
+  numberArray[numberArray.length - 4][numberArray.length - 1] = byte[2] + 5;
+  numberArray[numberArray.length - 4][numberArray.length - 2] = byte[3] + 5;
+  numberArray[numberArray.length - 5][numberArray.length - 1] = byte[4] + 5;
+  numberArray[numberArray.length - 5][numberArray.length - 2] = byte[5] + 5;
+  numberArray[numberArray.length - 6][numberArray.length - 1] = byte[6] + 5;
+  numberArray[numberArray.length - 6][numberArray.length - 2] = byte[7] + 5;
 }
 
 export function colorBits(input: number[]) {
