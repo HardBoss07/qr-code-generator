@@ -18,9 +18,12 @@ export default function Home() {
 
   useEffect(() => {
     const updatedBinary = convert(inputText);
-    setBinary(updatedBinary);
-    setLengthOfData(inputText.length);
-    setData(updatedBinary);
+    if (inputText.length != 0) {
+      setBinary(updatedBinary);
+      setLengthOfData(inputText.length);
+      setData(updatedBinary);
+    }
+    else return;
   }, [inputText]);
 
   return (
