@@ -7,6 +7,7 @@ import { intToByte } from '@/app/binary-converter';
 
 const bytePositions = new Map<number, number[][]>();
 bytePositions.set(0, [[18, 24], [18, 23], [17, 24], [17, 23], [16, 24], [16, 23], [15, 24], [15, 23]]);
+bytePositions.set(1, [[14, 24], [14, 23], [13, 24], [13, 23], [12, 24], [12, 23], [11, 24], [11, 23]]);
 
 const numberArray: number[][] = [
 // 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
@@ -52,9 +53,10 @@ export function setLengthOfData(input: number) {
 }
 
 export function setData(data: number[][]) {
-  if (data.length != 0) {
+  if (data.length >= 1) {
     // @ts-expect-error
     const cords: number[][] = bytePositions.get(0);
+
     numberArray[cords[0][0]][cords[0][1]] = data[0][0];
     numberArray[cords[1][0]][cords[1][1]] = data[0][1];
     numberArray[cords[2][0]][cords[2][1]] = data[0][2];
@@ -63,6 +65,19 @@ export function setData(data: number[][]) {
     numberArray[cords[5][0]][cords[5][1]] = data[0][5];
     numberArray[cords[6][0]][cords[6][1]] = data[0][6];
     numberArray[cords[7][0]][cords[7][1]] = data[0][7];
+
+    // @ts-expect-error
+    const cords1: number[][] = bytePositions.get(1);
+    if (data.length == 2) {
+      numberArray[cords1[0][0]][cords1[0][1]] = data[1][0];
+      numberArray[cords1[1][0]][cords1[1][1]] = data[1][1];
+      numberArray[cords1[2][0]][cords1[2][1]] = data[1][2];
+      numberArray[cords1[3][0]][cords1[3][1]] = data[1][3];
+      numberArray[cords1[4][0]][cords1[4][1]] = data[1][4];
+      numberArray[cords1[5][0]][cords1[5][1]] = data[1][5];
+      numberArray[cords1[6][0]][cords1[6][1]] = data[1][6];
+      numberArray[cords1[7][0]][cords1[7][1]] = data[1][7];
+    }
   }
   /*for (let i = 0; i < data.length; i++) {
     const cords = bytePositions.get(i);
