@@ -54,62 +54,15 @@ export function setLengthOfData(input: number) {
 
 export function setData(data: number[][]) {
   if (data.length >= 1) {
-    // @ts-expect-error
-    const cords: number[][] = bytePositions.get(0);
-
-    numberArray[cords[0][0]][cords[0][1]] = data[0][0];
-    numberArray[cords[1][0]][cords[1][1]] = data[0][1];
-    numberArray[cords[2][0]][cords[2][1]] = data[0][2];
-    numberArray[cords[3][0]][cords[3][1]] = data[0][3];
-    numberArray[cords[4][0]][cords[4][1]] = data[0][4];
-    numberArray[cords[5][0]][cords[5][1]] = data[0][5];
-    numberArray[cords[6][0]][cords[6][1]] = data[0][6];
-    numberArray[cords[7][0]][cords[7][1]] = data[0][7];
-
-    // @ts-expect-error
-    const cords1: number[][] = bytePositions.get(1);
-    if (data.length == 2) {
-      numberArray[cords1[0][0]][cords1[0][1]] = data[1][0];
-      numberArray[cords1[1][0]][cords1[1][1]] = data[1][1];
-      numberArray[cords1[2][0]][cords1[2][1]] = data[1][2];
-      numberArray[cords1[3][0]][cords1[3][1]] = data[1][3];
-      numberArray[cords1[4][0]][cords1[4][1]] = data[1][4];
-      numberArray[cords1[5][0]][cords1[5][1]] = data[1][5];
-      numberArray[cords1[6][0]][cords1[6][1]] = data[1][6];
-      numberArray[cords1[7][0]][cords1[7][1]] = data[1][7];
+    for (let j = 0; j < data.length; j++) {
+      // @ts-expect-error
+      const cords: number[][] = bytePositions.get(j);
+      if (cords) {
+        for (let i = 0; i < 8; i++) {
+          console.log("j:", j, "\ni:", i)
+          numberArray[cords[i][0]][cords[i][1]] = data[j][i];
+        }
+      }
     }
   }
-  /*for (let i = 0; i < data.length; i++) {
-    const cords = bytePositions.get(i);
-    if (cords) {
-      colorByte(cords, data[i]);
-    } else {
-      console.error(`No byte positions found for index ${i}`);
-    }
-  }
-  console.log(numberArray)*/
-}
-
-export function colorByte(cords: number[][], data: number[]) {
-  console.log("cords: ", cords, "\n data: ", data);
-  numberArray[cords[0][0]][cords[0][1]] = data[0];
-  numberArray[cords[0][0]][cords[0][1]] = data[1];
-  numberArray[cords[1][0]][cords[1][1]] = data[2];
-  numberArray[cords[1][0]][cords[1][1]] = data[3];
-  numberArray[cords[2][0]][cords[2][1]] = data[4];
-  numberArray[cords[2][0]][cords[2][1]] = data[5];
-  numberArray[cords[3][0]][cords[3][1]] = data[6];
-  numberArray[cords[3][0]][cords[3][1]] = data[7];
-}
-
-export function colorBits(input: number[]) {
-  console.log("input array: ", input);
-  numberArray[numberArray.length - 1][numberArray.length - 1] = input[0];
-  numberArray[numberArray.length - 1][numberArray.length - 2] = input[1];
-  numberArray[numberArray.length - 2][numberArray.length - 1] = input[2];
-  numberArray[numberArray.length - 2][numberArray.length - 2] = input[3];
-  numberArray[numberArray.length - 3][numberArray.length - 1] = input[4];
-  numberArray[numberArray.length - 3][numberArray.length - 2] = input[5];
-  numberArray[numberArray.length - 4][numberArray.length - 1] = input[6];
-  numberArray[numberArray.length - 4][numberArray.length - 2] = input[7];
 }
