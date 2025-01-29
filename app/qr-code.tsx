@@ -72,5 +72,20 @@ export function setData(data: number[][]) {
         }
       }
     }
+  } else {
+    clearData();
   }
+}
+
+export function clearData() {
+  for (let i = 0; i < bytePositions.size; i++) {
+    // @ts-expect-error
+    const cords: number[][] = bytePositions.get(i);
+    if (cords) {
+      for (let j = 0; j < 8; j++) {
+        numberArray[cords[j][0]][cords[j][1]] = 0;
+      }
+    }
+  }
+  console.log(numberArray);
 }

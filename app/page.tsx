@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import qr_code from "@/app/qr-code";
 import { convert } from '@/app/binary-converter';
 // import { colorBits } from '@/app/qr-code';
-import { setLengthOfData, setData } from '@/app/qr-code'
+import { setLengthOfData, setData, clearData } from '@/app/qr-code'
+import ButtonComponent from "./ButtonComponent";
 
-export default function Home() {
+export default function Home(){
   const [inputText, setInputText] = useState("");
   const [binary, setBinary] = useState<number[][]>([]);
 
@@ -15,6 +16,11 @@ export default function Home() {
 
   const squareSize = 10;
   const gridWidth = squareSize * numberArray[0].length;
+
+  const handleClick = () => {
+    console.log('Button clicked!');
+    resetData();
+  };
 
   useEffect(() => {
     const updatedBinary = convert(inputText);
@@ -25,6 +31,14 @@ export default function Home() {
     }
     else return;
   }, [inputText]);
+
+  const resetData = () => {
+    setInputText("");
+    setBinary([]);
+    setLengthOfData(inputText.length);
+    setData([]);
+    clearData();
+  }
 
   return (
     <section className="py-24">
@@ -41,6 +55,9 @@ export default function Home() {
             className="border p-2 rounded w-full max-w-md"
           />
         </div>
+
+        {/* Clear QR Code Button */}
+        <ButtonComponent onClick={handleClick} />
 
         {/* QR Code Grid */}
         <div
