@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import qr_code from "@/app/qr-code";
 import { convert } from '@/app/binary-converter';
-// import { colorBits } from '@/app/qr-code';
 import { setLengthOfData, setData, clearData } from '@/app/qr-code'
 import ButtonComponent from "./ButtonComponent";
 
@@ -34,8 +33,8 @@ export default function Home(){
 
   const resetData = () => {
     setInputText("");
-    setBinary([]);
     setLengthOfData(inputText.length);
+    setBinary([]);
     setData([]);
     clearData();
   }
