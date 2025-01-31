@@ -87,8 +87,19 @@ export function setData(data: number[][]) {
         }
       }
     }
+    setEndOfData(data.length);
   } else {
     clearData();
+  }
+}
+
+function setEndOfData(lenghtOfData: number) {
+  // @ts-expect-error
+  const cords: number[][] = bytePositions.get(lenghtOfData);
+  if (cords) {
+    for (let i = 0; i < 4; i++) {
+      numberArray[cords[i][0]][cords[i][1]] = 5;
+    }
   }
 }
 
