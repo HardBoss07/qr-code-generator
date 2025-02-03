@@ -45,3 +45,42 @@ class GaloisField {
 }
 
 GaloisField.init();
+
+// ECC = Error Correction Codewords
+function generateGeneratorPolynomial(ECCamount: number): number[] {
+  let final = [1];
+
+  for (let i = 0; i < ECCamount; i++) {
+    const term = [1, GaloisField.expTable[i]];
+    final = polynomialMultiply(final, term);
+  }
+  return final;
+}
+
+function polynomialMultiply(a: number[], b: number[]): number[] {
+  const result = new Array(a.length + b.length - 1).fill(0);
+
+  for (let i = 0; i < a.length; i++) {
+    for (let j = 0; j < b.length; j++) {
+      result[i + j] ^= GaloisField.multiply(a[i], b[j]);
+    }
+  }
+
+  return result;
+}
+
+export function reedSolomonEncode(data: number[], ECCamount: number): number[] {
+  const generator = generateGeneratorPolynomial(ECCamount);
+
+  const paddedData = data.slice();
+  for (let i = 0; i < data.length; i++) {
+    const coefficient = paddedData[i];
+    if (coefficient !== 0) {
+      for (let j = 0; j < generator.length; j++) {
+        paddedData[i + j] ^= GaloisField.multiply(generator[j], coefficient);
+      }
+    }
+  }
+
+  return paddedData.slice(data.length);
+}

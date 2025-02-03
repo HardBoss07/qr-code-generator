@@ -4,6 +4,7 @@
 // 3 = Format strip
 // 5, 6 = White and Black for Fixed bits
 import { intToByte } from '@/app/binary-converter';
+import { reedSolomonEncode } from '@/app/reed-solomon'
 
 const bytePositions = new Map<number, number[][]>();
 //         byte nr:       bit-1     bit-2     bit-3     bit-4     bit-5     bit-6     bit-7    bit-8
@@ -115,4 +116,27 @@ export function clearData() {
     }
   }
   console.log(numberArray);
+}
+
+export function setDataWithErrorCorrection(data: number[][], ECCamount: number) {
+  const flatData = data.flat();
+  const ECC = reedSolomonEncode(flatData, ECCamount);
+  const encodedData = [...flatData, ...ECC];
+
+  console.log("in gr", encodedData);
+
+  if (encodedData.length >= 1) {
+    for (let i = 0; i < encodedData.length; i++) {
+      // @ts-expect-error
+      const cords: number[][] = bytePositions.get(i);
+      if (cords) {
+        for (let j = 0; j < 8; j++) {
+          numberArray[cords[j][0]][cords[j][1]] = encodedData[j * 8 + 1];
+        }
+      }
+    }
+    setEndOfData(encodedData.length);
+  } else {
+    clearData();
+  }
 }

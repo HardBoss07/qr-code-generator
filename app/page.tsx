@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import qr_code from "@/app/qr-code";
 import { convert } from '@/app/binary-converter';
-import { setLengthOfData, setData, clearData } from '@/app/qr-code'
+import { setLengthOfData, setData, clearData, setDataWithErrorCorrection } from '@/app/qr-code'
 import ButtonComponent from "./ButtonComponent";
 
 export default function Home(){
@@ -16,10 +16,13 @@ export default function Home(){
   const squareSize = 10;
   const gridWidth = squareSize * numberArray[0].length;
 
-  const handleClick = () => {
-    console.log('Button clicked!');
+  const clearQrCode = () => {
     resetData();
   };
+
+  const generateReedSolomon = () => {
+    reedSolomon();
+  }
 
   useEffect(() => {
     const updatedBinary = convert(inputText);
@@ -39,6 +42,12 @@ export default function Home(){
     clearData();
   }
 
+  const reedSolomon = () => {
+    setDataWithErrorCorrection(binary, binary.length);
+    console.log(binary, "\nlength: ", binary.length)
+    console.log("ECC: ", setDataWithErrorCorrection(binary, binary.length));
+  }
+
   return (
     <section className="py-24">
       <div className="container">
@@ -56,7 +65,10 @@ export default function Home(){
         </div>
 
         {/* Clear QR Code Button */}
-        <ButtonComponent onClick={handleClick} />
+        <ButtonComponent onClick={clearQrCode} label={"Clear QR Code"}/>
+
+        {/* Generate Reed Solomon Button */}
+        <ButtonComponent onClick={generateReedSolomon} label={"Test Reed Solomon"}/>
 
         {/* QR Code Grid */}
         <div
