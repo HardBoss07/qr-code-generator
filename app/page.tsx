@@ -11,7 +11,7 @@ export default function Home(){
   const [binary, setBinary] = useState<number[][]>([]);
 
   const numberArray: number[][] = qr_code();
-  const colorMapping = ["white", "black", "green", "red", "placeholder", "teal", "violet"];
+  const colorMapping = ["white", "black", "green", "red", "placeholder", "teal", "violet", 'yellow', 'cyan'];
 
   const squareSize = 10;
   const gridWidth = squareSize * numberArray[0].length;

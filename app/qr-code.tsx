@@ -1,10 +1,12 @@
 // 0 = White
 // 1 = Black
 // 2 = Quiet Zone (White in final)
-// 3 = Format strip
+// 3 = undefined part of Format strip
 // 5, 6 = White and Black for Fixed bits
+// 7, 8 = White and Black for defined Format strip
 import { intToByte } from '@/app/binary-converter';
 import { reedSolomonEncode } from '@/app/reed-solomon'
+import { FormatStrip } from '@/app/format-strip'
 
 const byteCoordinates: number[][] = [
     [18, 24], [18, 23], [17, 24], [17, 23], [16, 24], [16, 23], [15, 24], [15, 23],
@@ -30,6 +32,11 @@ const byteCoordinates: number[][] = [
     [11, 13], [12, 14], [12, 13], [13, 14], [13, 13], [14, 14], [14, 13], [15, 14],
     [15, 13], [16, 14], [16, 13], [17, 14], [17, 13], [18, 14], [18, 13], [19, 14],
     [19, 13], [20, 14], [20, 13], [21, 14], [21, 13], [22, 14], [22, 13], [23, 14]
+];
+
+const fiveBitCodeCoordinates: number[][] = [
+    [ 8, 0], [ 8, 1], [ 8, 2], [ 8, 3], [ 8, 4],
+    [24, 8], [23, 8], [22, 8], [21, 8], [20, 8]
 ];
 
 const numberArray: number[][] = [
@@ -139,4 +146,15 @@ function getNextByteCords(amountOfCords: number, byteNumb: number): number[][] {
   }
 
   return cords;
+}
+
+export function setFiveBitCodeInFormatStrip(EClevel: string, maskNumb: number) {
+  const fiveBitCode = FormatStrip.fiveBitCode(EClevel, maskNumb);
+
+  for (let i = 0; i < 5; i++) {
+    let cords = fiveBitCodeCoordinates[i];
+    numberArray[cords[0]][cords[1]] = fiveBitCode[i] + 7;
+    cords = fiveBitCodeCoordinates[i + 5];
+    numberArray[cords[0]][cords[1]] = fiveBitCode[i] + 7;
+  }
 }
