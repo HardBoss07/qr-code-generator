@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import qr_code from "@/app/qr-code";
 import { convert } from '@/app/binary-converter';
-import { setLengthOfData, setData, clearData, setDataWithErrorCorrection } from '@/app/qr-code'
+import { setLengthOfData, setData, clearData, setDataWithErrorCorrection, setFiveBitCodeInFormatStrip } from '@/app/qr-code'
 import ButtonComponent from "./ButtonComponent";
 
 export default function Home(){
@@ -22,6 +22,10 @@ export default function Home(){
 
   const generateReedSolomon = () => {
     reedSolomon();
+  }
+
+  const setFiveBitFormatStrip = () => {
+    setFiveBitCodeInFormatStrip("M", 2);
   }
 
   useEffect(() => {
@@ -69,6 +73,9 @@ export default function Home(){
 
         {/* Generate Reed Solomon Button */}
         <ButtonComponent onClick={generateReedSolomon} label={"Test Reed Solomon"}/>
+
+        {/* Set five bit format strip Button */}
+        <ButtonComponent onClick={setFiveBitFormatStrip} label={"Set 5 Bits in Format Strip"} />
 
         {/* QR Code Grid */}
         <div
