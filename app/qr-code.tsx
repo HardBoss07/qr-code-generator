@@ -101,6 +101,7 @@ export function setLengthOfData(input: number) {
 }
 
 export function setData(data: number[][]) {
+  clearData();
   if (data.length >= 1) {
     for (let j = 0; j < data.length; j++) {
       const cords: number[][] = getNextByteCords(8, 0);
@@ -135,7 +136,7 @@ export function setDataWithErrorCorrection(data: number[][], ECCamount: number) 
   const ECC = reedSolomonEncode(flatData, ECCamount);
   const encodedData = [...flatData, ...ECC];
 
-  console.log("in gr", encodedData);
+  console.log("in qr", encodedData);
 /*
   if (encodedData.length >= 1) {
     for (let i = 0; i < encodedData.length; i++) {
@@ -158,7 +159,7 @@ function getNextByteCords(amountOfCords: number, byteNumb: number): number[][] {
   const cords: number[][] = new Array(amountOfCords);
 
   for (let i = 0; i < amountOfCords; i++) {
-    cords[i] = byteCoordinates[i * offset];
+    cords[i] = byteCoordinates[i + offset];
   }
 
   return cords;
