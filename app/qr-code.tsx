@@ -104,7 +104,7 @@ export function setData(data: number[][]) {
   clearData();
   if (data.length >= 1) {
     for (let j = 0; j < data.length; j++) {
-      const cords: number[][] = getNextByteCords(8, 0);
+      const cords: number[][] = getNextByteCords(8, j);
       if (cords) {
         for (let i = 0; i < 8; i++) {
           numberArray[cords[i][0]][cords[i][1]] = data[j][i];
