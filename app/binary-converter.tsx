@@ -1,3 +1,9 @@
+/**
+ * qr-code.tsx
+ * @author Matteo Bosshard
+ * @version 13.03.2025
+ */
+
 const ascii_Map = new Map([
   ["a", [0, 1, 1, 0, 0, 0, 0, 1]],
   ["b", [0, 1, 1, 0, 0, 0, 1, 0]],

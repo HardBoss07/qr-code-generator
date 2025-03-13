@@ -1,3 +1,9 @@
+/**
+ * qr-code.tsx
+ * @author Matteo Bosshard
+ * @version 13.03.2025
+ */
+
 // 0 = White
 // 1 = Black
 // 2 = Quiet Zone (White in final)

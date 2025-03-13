@@ -1,3 +1,9 @@
+/**
+ * qr-code.tsx
+ * @author Matteo Bosshard
+ * @version 13.03.2025
+ */
+
 "use client";
 
 import React, { useState, useEffect } from "react";

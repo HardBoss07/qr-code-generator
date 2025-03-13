@@ -1,3 +1,9 @@
+/**
+ * qr-code.tsx
+ * @author Matteo Bosshard
+ * @version 13.03.2025
+ */
+
 export class FormatStrip {
   static readonly errorCorrectionMap = new Map([
     ["L", [0, 1]], // Low 7%

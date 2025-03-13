@@ -1,3 +1,9 @@
+/**
+ * qr-code.tsx
+ * @author Matteo Bosshard
+ * @version 13.03.2025
+ */
+
 class GaloisField {
   static readonly GF_SIZE = 256;
   static readonly PRIMITIVE_POLY = 0x11D; // x^8 + x^4+ x^3 + x^2 + 1
